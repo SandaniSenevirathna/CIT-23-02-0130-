@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Voting App</title>
+    <base href="/index.html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="docker-compose, docker, sample, voting, api">
+    <meta name="author" content="Docker">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <style>
+        body { background-color: #F8F8F8; }
+        .container { margin-top: 50px; }
+        .choice { margin: 20px 0; }
+        .choice button { width: 100%; height: 80px; font-size: 18px; }
+        .a { background-color: #1abc9c; border-color: #16a085; color: white; }
+        .b { background-color: #3498db; border-color: #2980b9; color: white; }
+        .vote-result { margin-top: 30px; text-align: center; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-8 col-sm-offset-2">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h2>🗳️ Simple Voting App</h2>
+                        <p>Which do you prefer?</p>
+                    </div>
+                    <div class="panel-body">
+                        {% if vote %}
+                        <div class="vote-result">
+                            <h3>✅ Vote Recorded!</h3>
+                            <p>You voted for <strong>{{vote}}</strong></p>
+                            <p><a href="/result" target="_blank">View Results →</a></p>
+                        </div>
+                        {% else %}
+                        <form method="POST">
+                            <div class="choice">
+                                <button type="submit" name="vote" value="{{option_a}}" class="btn btn-lg a">
+                                    🐱 {{option_a}}
+                                </button>
+                            </div>
+                            <div class="choice">  
+                                <button type="submit" name="vote" value="{{option_b}}" class="btn btn-lg b">
+                                    🐶 {{option_b}}
+                                </button>
+                            </div>
+                        </form>
+                        {% endif %}
+                    </div>
+                    <div class="panel-footer">
+                        <small>Served by: {{hostname}}</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
